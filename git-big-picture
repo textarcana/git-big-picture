@@ -595,7 +595,7 @@ class Git(object):
 
         parents = {}
         lines = self('git rev-list --all --parents')
-        for line in lines[:10]:
+        for line in lines:
             sha_ones = [e.group(0) for e in re.finditer(sha1_pattern, line)]
             count = len(sha_ones)
             if count > 1:
