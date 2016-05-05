@@ -561,7 +561,7 @@ class Git(object):
         def add_to_dict(dic, sha1, name):
             dic.setdefault(sha1, set()).add(name)
 
-        for ref_info in output:
+        for ref_info in output[:10]:
             sha1, tag_sha1, ref_type, name = eval(ref_info)
             if ref_type not in ['commit', 'tag']:
                 continue
@@ -595,7 +595,7 @@ class Git(object):
 
         parents = {}
         lines = self('git rev-list --all --parents')
-        for line in lines:
+        for line in lines[:10]:
             sha_ones = [e.group(0) for e in re.finditer(sha1_pattern, line)]
             count = len(sha_ones)
             if count > 1:
